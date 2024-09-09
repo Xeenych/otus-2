@@ -3,16 +3,22 @@
 #include <array>
 #include <cstdint>
 #include <iostream>
-#include <string_view>
+#include <sstream>
 
 class ipaddr_t : public std::array<uint8_t, 4> {
    public:
-    ipaddr_t() = default;
+    ipaddr_t(const std::string& s) {
+        std::istringstream ss{s};
 
-    bool parse(std::string_view s) { return true; }
+        for (auto& d : *this) {
+            char unused;
+            unsigned int v = 0;
+            ss >> v >> unused;
+            d = v;
+        }
+    }
 };
 
 std::ostream& operator<<(std::ostream& s, const ipaddr_t& a) {
-    s << a[0] << "." << a[1] << "." << a[2] << "." << a[3];
-    return s;
+    return s << +a[0] << "." << +a[1] << "." << +a[2] << "." << +a[3];
 }
