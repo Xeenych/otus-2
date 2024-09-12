@@ -4,6 +4,13 @@
 #include <iostream>
 #include <vector>
 
+std::ostream& operator<<(std::ostream& s, const std::vector<ipaddr_t>& v) {
+    for (const auto& ip : v) {
+        s << ip << std::endl;
+    }
+    return s;
+}
+
 int main(int argc, char const* argv[]) {
     std::vector<ipaddr_t> ip_pool{};
 
@@ -11,11 +18,10 @@ int main(int argc, char const* argv[]) {
         ip_pool.push_back({line});
     }
 
+    // сортировка в обратном порядке
     std::sort(ip_pool.rbegin(), ip_pool.rend());
 
-    for (const auto& ip : ip_pool) {
-        std::cout << ip << std::endl;
-    }
+    std::cout << ip_pool;
 
     return 0;
 }
