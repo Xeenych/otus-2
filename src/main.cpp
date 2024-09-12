@@ -22,13 +22,13 @@ int main(int argc, char const* argv[]) {
     std::sort(ip_pool.rbegin(), ip_pool.rend());
     std::cout << ip_pool;
 
-    auto view_1 = ip_pool | std::views::filter([](ipaddr_t a) { return 1 == a[0]; });
+    auto view_1 = ip_pool | std::views::filter([](const ipaddr_t& a) { return 1 == a[0]; });
     std::cout << view_1;
 
-    auto view_2 = ip_pool | std::views::filter([](ipaddr_t a) { return (46 == a[0]) && (70 == a[1]); });
+    auto view_2 = ip_pool | std::views::filter([](const ipaddr_t& a) { return (46 == a[0]) && (70 == a[1]); });
     std::cout << view_2;
 
-    auto view_3 = ip_pool | std::views::filter([](ipaddr_t a) {
+    auto view_3 = ip_pool | std::views::filter([](const ipaddr_t& a) {
                       return (std::any_of(a.begin(), a.end(), [](auto e) { return 46 == e; }));
                   });
     std::cout << view_3;
