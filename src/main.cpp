@@ -29,7 +29,7 @@ int main(int argc, char const* argv[]) {
     std::cout << view_2;
 
     auto view_3 = ip_pool | std::views::filter([](const ipaddr_t& a) {
-                      return (std::any_of(a.begin(), a.end(), [](auto e) { return 46 == e; }));
+                      return (std::any_of(a.begin(), a.end(), [](const auto& e) { return 46 == e; }));
                   });
     std::cout << view_3;
     return 0;
